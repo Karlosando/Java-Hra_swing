@@ -13,6 +13,7 @@ public class Player implements KeyListener, MouseListener {
     int x=50;
     int y=50;
 
+    Point mousePosLeft;
 
     int speed = 2;
 
@@ -21,6 +22,16 @@ public class Player implements KeyListener, MouseListener {
         g.fillRect(x,y,20,20);
     }
 
+    public void attack(Enemy enemy) {
+        if (mousePosLeft == null) {
+            return;
+        }
+        Rectangle aktualniZornePole = new Rectangle(enemy.x - 90, enemy.y - 90, 200, 200);
+        if(enemy.getBounds().contains(mousePosLeft) && aktualniZornePole.contains(this.x,this.y)) {
+            System.out.println("Hit!");
+        }
+        mousePosLeft = null;
+    }
 
     public void movement() {
         if (up == true) {y-= speed;}
@@ -34,6 +45,8 @@ public class Player implements KeyListener, MouseListener {
         if (y > 535) {y = 535;}
         if (x > 760) {x = 760;}
     }
+
+
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -60,7 +73,11 @@ public class Player implements KeyListener, MouseListener {
     public void mouseClicked(MouseEvent e) {}
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+        int key = e.getButton();
+        if(key == MouseEvent.BUTTON1) {
+            mousePosLeft = e.getPoint();}
+    }
 
 
 

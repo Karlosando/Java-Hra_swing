@@ -9,9 +9,14 @@ public class Enemy {
     int y = 100;
 
     int casovac = 0;
-    ;
+
+    int hp=40;
 
     int smerHlidkovani;
+
+    public Rectangle getBounds() {
+        return new Rectangle(x,y, 20, 20);
+    }
 
     public void enemyMovement(Player player) {
         Rectangle zornePole = new Rectangle(this.x - 90, this.y - 90, 200, 200);
@@ -61,9 +66,11 @@ public class Enemy {
 
 
     public void draw(Graphics g) {
-        Rectangle hpBar = new Rectangle(this.x - 10, this.y - 10, 40, 5);
+        Rectangle hpBar = new Rectangle(this.x - 10, this.y - 10, hp, 5);
         g.setColor(new Color(8, 255, 0));
         g.fillRect(hpBar.x, hpBar.y, hpBar.width, hpBar.height);
+        g.setColor(new Color(255, 0, 0));
+        g.drawRect(hpBar.x, hpBar.y, 40, 5);
         Rectangle zornePole = new Rectangle(this.x - 90, this.y - 90, 200, 200);
         g.setColor(new Color(251, 222, 243));
         g.drawRect(zornePole.x, zornePole.y, zornePole.width, zornePole.height);

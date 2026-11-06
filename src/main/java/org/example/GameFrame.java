@@ -6,17 +6,22 @@ import java.awt.*;
 public class GameFrame extends JPanel {
     Player player = new Player();
     Enemy enemy = new Enemy();
+    Enemy enemy1 = new Enemy();
 
     public GameFrame() {
         setFocusable(true);
         addKeyListener(player);
+        addMouseListener(player);
 
 
 
 
         Timer timer = new Timer(16, e -> {
             player.movement();
+            player.attack(enemy);
             enemy.enemyMovement(player);
+            player.attack(enemy1);
+            enemy1.enemyMovement(player);
             repaint();
         });
         timer.start();
@@ -43,6 +48,7 @@ public class GameFrame extends JPanel {
 
         player.draw(g);
         enemy.draw(g);
+        enemy1.draw(g);
 
         Toolkit.getDefaultToolkit().sync();
     }
